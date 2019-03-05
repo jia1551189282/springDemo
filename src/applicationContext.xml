@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+
+        <!--三种方法实例化·-->
+        <!--1 使用构造方法实例化-->
+        <bean id="person" class="com.domain.Person"></bean>
+        <!--2 使用静态工厂的方式实例化-->
+        <bean id="person1" class="com.domain.PersonFactory" factory-method="createPerson"></bean>
+        <!--3 使用实例工厂-->
+        <bean id="personFactory1" class="com.domain.PersonFactory1"></bean>
+        <bean id="person2"  factory-bean="personFactory1" factory-method="createPerson"></bean>
+
+        <!-- 单例 和 多例-->
+        <bean id="person3" class="com.domain.Person1" scope="singleton"></bean>
+        <bean id="person4" class="com.domain.Person1" scope="prototype"></bean>
+
+        <!-- 属性注入 -->
+        <!-- 通过构造器注入-->
+        <bean id="user" class="com.domain.User">
+                <constructor-arg name="username" value="依然"></constructor-arg>
+                <constructor-arg name="password" value="123"></constructor-arg>
+        </bean>
+
+        <bean id="user1" class="com.domain.User">
+
+                <constructor-arg index="0" value="susu" type="java.lang.String"></constructor-arg>
+                <constructor-arg index="1" value="20" type="java.lang.Integer"></constructor-arg>
+        </bean>
+        <!--通过set方法注入-->
+        <bean id="user2" class="com.domain.User">
+                <property name="age" value="12"></property>
+                <property name="username" value="依然"></property>
+                <property name="password" value="123"></property>
+        </bean>
+
+        <bean id="user3" class="com.domain.User">
+                <property name="username" >
+                        <value>紫霞</value>
+                </property>
+                <property name="age">
+                        <value>6</value>
+                </property>
+        </bean>
+
+        <!-- 集合注入-->
+        <bean id="user4" class="com.domain.User">
+
+                <property name="username" value="佳佳"></property>
+                <property name="cars">
+                        <list>
+                                <value>保时捷911</value>
+                                <value>法拉利458</value>
+                                <value>奥迪r8</value>
+                        </list>
+                </property>
+        </bean>
+
+        <bean id="user5" class="com.domain.User">
+                <property name="username" value="susu"></property>
+                <property name="city">
+                        <set>
+                                <value>北京</value>
+                                <value>上海</value>
+                                <value>广州</value>
+                        </set>
+                </property>
+        </bean>
+
+        <bean id="user6" class="com.domain.User">
+                <property name="username" value="成成"></property>
+                <property name="info">
+                       <map>
+                               <entry key="city" value="黑龙江"></entry>
+                               <entry key="work" value="前端"></entry>
+                       </map>
+                </property>
+        </bean>
+
+        <bean id="user7" class="com.domain.User">
+                <property name="username" value="mysql"></property>
+                <property name="properties">
+                        <props>
+                                <prop key="username">root</prop>
+                                <prop key="password">root</prop>
+                        </props>
+                </property>
+        </bean>
+
+        <bean id="user8" class="com.domain.User">
+                <property name="members">
+                        <array>
+                                <value>爸爸</value>
+                                <value>妈妈</value>
+                                <value>爷爷</value>
+                                <value>奶奶</value>
+                        </array>
+                </property>
+        </bean>
+
+
+
+</beans>
